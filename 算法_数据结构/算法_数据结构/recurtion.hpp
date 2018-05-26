@@ -56,3 +56,29 @@ void PrintStrReversed(char endflag)
 	if (datas != endflag)	PrintStrReversed(endflag);
 	if (datas != endflag)   printf("%c", datas);
 }
+
+
+/************************************************************************/
+/* 
+	递归的实现 3
+	接口是使用分治思想来实现折半查找，并采用递归的方式
+	分治思想主要是大而化小，将大的问题切割成小的问题
+
+	数组 a[]  查找的远程 b
+	获取中间的位置 和 b比较 大于b 从左半部分查找  小于b从右半部分查找
+*/
+/************************************************************************/
+int FindMemberLocation(int  all[],int begin, int end,const int findone)
+{
+	int middle = ((end + begin) >> 1);
+	if (end < begin || (end == begin) && all[end] != findone)
+		return -1;
+	if (all[middle] > findone)
+		FindMemberLocation(all, begin, (middle - 1),findone);
+	else if (all[middle] < findone)
+		FindMemberLocation(all, middle + 1,end, findone);
+	else
+		return middle;
+}
+
+
